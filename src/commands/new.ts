@@ -82,15 +82,6 @@ export const newCommand = defineCommand({
       process.exit(1)
     }
 
-    const envPath = `${targetDir}/.env`
-    const envArrive = yoctoSpinner({ text: 'Wait env file…' }).start()
-    
-    try {
-        await Bun.file(envPath).exists()
-    } catch {
-        envArrive.error('Error, .env not find in template.');
-    }
-
     // bun run push
     const pushSpinner = yoctoSpinner({ text: 'syncing database schema…' }).start()
     try {
