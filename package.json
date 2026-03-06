@@ -1,5 +1,8 @@
 {
   "name": "elysia-cli",
+  "bin": {
+    "elysia-cli": "./src/index.ts"
+  },
   "module": "src/index.ts",
   "type": "module",
   "private": true,
