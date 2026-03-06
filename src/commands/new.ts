@@ -8,12 +8,12 @@ import yoctoSpinner from 'yocto-spinner'
 const TEMPLATE_URL = 'https://github.com/kliti72/elysia-template.git'
 
 const c = {
-  reset:  '\x1b[0m',
-  bold:   '\x1b[1m',
-  green:  '\x1b[32m',
-  cyan:   '\x1b[36m',
-  red:    '\x1b[31m',
-  gray:   '\x1b[90m',
+  reset: '\x1b[0m',
+  bold: '\x1b[1m',
+  green: '\x1b[32m',
+  cyan: '\x1b[36m',
+  red: '\x1b[31m',
+  gray: '\x1b[90m',
 }
 
 async function prompt(question: string): Promise<string> {
@@ -80,6 +80,15 @@ export const newCommand = defineCommand({
     } catch {
       bunSpinner.error('error in bun install')
       process.exit(1)
+    }
+
+    const envPath = `${targetDir}/.env`
+    const envArrive = yoctoSpinner({ text: 'Wait env file…' }).start()
+    
+    try {
+        await Bun.file(envPath).exists()
+    } catch {
+        envArrive.error('Error, .env not find in template.');
     }
 
     // bun run push
