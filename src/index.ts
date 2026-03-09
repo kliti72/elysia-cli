@@ -7,9 +7,9 @@ import { relateCommand } from './commands/relate'
 
 const main = defineCommand({
   meta: {
-    name: 'elysia-cli',
-    version: '0.1.0',
-    description: 'CLI for scaffolding and generating Elysia modules',
+    name: 'elysia-kit',
+    version: '0.1.1',
+    description: 'CLI for scaffolding and generating Elysia modules, MVC, Drizzle CRUD, ORM.',
   },
   subCommands: {
     new:      newCommand,
