@@ -1,6 +1,6 @@
 {
   "name": "elysia-kit",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "bin": {
     "elysia-kit": "./src/index.ts",
     "elysia-cli": "./src/index.ts",

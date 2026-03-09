@@ -2,11 +2,6 @@
 
 CLI tool for [Elysia](https://elysiajs.com/) that scaffolds new projects and generates fully structured modules with a single command. Built for [elysia-template](https://github.com/kliti72/elysia-template).
 
-## Installation
-
-```bash
-bun link
-```
 
 ## Commands
 
