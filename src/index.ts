@@ -1,20 +1,21 @@
 #!/usr/bin/env bun
-
 import { defineCommand, runMain } from 'citty'
 import { newCommand } from './commands/new'
 import { generateCommand } from './commands/generate'
-import { addCommand } from './commands/add'
+import { generateFullCommand } from './commands/generateFull'
+import { relateCommand } from './commands/relate'
 
 const main = defineCommand({
   meta: {
     name: 'elysia-cli',
     version: '0.1.0',
-    description: 'CLI per scaffolding e generazione moduli Elysia',
+    description: 'CLI for scaffolding and generating Elysia modules',
   },
   subCommands: {
-    new: newCommand,
+    new:      newCommand,
     generate: generateCommand,
-    add: addCommand,
+    gfull:    generateFullCommand,
+    relate:   relateCommand,
   },
 })
 

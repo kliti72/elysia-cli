@@ -3,6 +3,7 @@ import { defineCommand } from 'citty'
 import fs from 'node:fs'
 import path from 'node:path'
 import yoctoSpinner from 'yocto-spinner'
+import { isElysiaProject } from './generateFull'
 
 const c = {
   reset:  '\x1b[0m',
@@ -12,17 +13,6 @@ const c = {
   red:    '\x1b[31m',
   gray:   '\x1b[90m',
   yellow: '\x1b[33m',
-}
-
-function isElysiaProject(): boolean {
-  const pkgPath = path.resolve(process.cwd(), 'package.json')
-  if (!fs.existsSync(pkgPath)) return false
-  try {
-    const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'))
-    return !!(pkg.dependencies?.elysia || pkg.devDependencies?.elysia)
-  } catch {
-    return false
-  }
 }
 
 function hasAppStructure(): boolean {
@@ -65,10 +55,10 @@ export const generateCommand = defineCommand({
     }
 
     // ── check duplicates ──────────────────────────────────────────────────────
-    const controllerPath   = path.resolve(cwd, 'app', 'controllers',  `${name}.controller.ts`)
-    const servicePath      = path.resolve(cwd, 'app', 'services',     `${name}.service.ts`)
-    const repositoryPath   = path.resolve(cwd, 'app', 'repositories', `${name}.repository.ts`)
-    const typesPath        = path.resolve(cwd, 'app', 'types',        `${name}.types.ts`)
+    const controllerPath   = path.resolve(cwd, 'app', 'controllers',  `${name}.controller.tsx`)
+    const servicePath      = path.resolve(cwd, 'app', 'services',     `${name}.service.tsx`)
+    const repositoryPath   = path.resolve(cwd, 'app', 'repositories', `${name}.repository.tsx`)
+    const typesPath        = path.resolve(cwd, 'app', 'types',        `${name}.types.tsx`)
 
     if (fs.existsSync(controllerPath)) {
       console.error(`  ${c.red}✗ module "${name}" already exists${c.reset}\n`)
@@ -97,7 +87,7 @@ export const generateCommand = defineCommand({
       // add import after last import line
       const lastImport = routes.lastIndexOf('\nimport ')
       const endOfImport = routes.indexOf('\n', lastImport + 1)
-      const importLine = `\nimport { ${name}Controller } from './controllers/${name}.controller'`
+      const importLine = `\nimport { ${name}Controller } from './controllers/${name}.controller' \n`
       routes = routes.slice(0, endOfImport + 1) + importLine + routes.slice(endOfImport + 1)
 
       // add route entry before closing bracket of array
@@ -111,10 +101,10 @@ export const generateCommand = defineCommand({
 
     console.log(`
   ${c.gray}files created:${c.reset}
-    app/controllers/${name}.controller.ts
-    app/services/${name}.service.ts
-    app/repositories/${name}.repository.ts
-    app/types/${name}.types.ts
+    app/controllers/${name}.controller.tsx
+    app/services/${name}.service.tsx
+    app/repositories/${name}.repository.tsx
+    app/types/${name}.types.tsx
 
   ${c.gray}registered in:${c.reset}
     app/routes.ts  ${c.green}✓${c.reset}
