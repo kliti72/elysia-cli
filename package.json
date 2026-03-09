@@ -3,6 +3,12 @@
   "bin": {
     "elysia-cli": "./src/index.ts"
   },
+  "files": [
+    "src/"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "module": "src/index.ts",
   "type": "module",
   "private": true,
