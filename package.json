@@ -1,8 +1,8 @@
 {
-  "name": "elysia-cli",
+  "name": "elysiajs-cli",
   "version": "0.1.0",
   "bin": {
-    "elysia-cli": "./src/index.ts"
+    "elysiajs-cli": "./src/index.ts"
   },
   "files": [
     "src/"
